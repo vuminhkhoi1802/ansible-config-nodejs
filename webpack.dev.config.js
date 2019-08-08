@@ -1,0 +1,29 @@
+const path = require('path');
+
+module.exports = {
+  mode: 'development',
+  entry: ['core-js/stable', 'regenerator-runtime/runtime', './src/index.js'],
+  output: {
+    path: path.resolve(__dirname, 'public'),
+    filename: 'bundle.js',
+  },
+  resolve: {
+    extensions: ['*', '.js', '.jsx'],
+  },
+  module: {
+    rules: [
+      {
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: { babelrc: true },
+        },
+      },
+    ],
+  },
+  devServer: {
+    compress: true,
+    contentBase: path.join(__dirname, 'public'),
+  },
+};

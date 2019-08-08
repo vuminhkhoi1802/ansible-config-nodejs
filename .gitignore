@@ -1,0 +1,14 @@
+.cache
+.npm
+.env
+.env.test
+.eslintcache
+
+logs
+yarn-error.log
+package-error.log
+
+build/
+trash/
+node_modules/
+TODO
