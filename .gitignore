@@ -8,7 +8,7 @@ logs
 yarn-error.log
 package-error.log
 
-build/
+public/bundle.js
 trash/
 node_modules/
 TODO

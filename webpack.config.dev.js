@@ -1,8 +1,14 @@
 const path = require('path');
+const { NoEmitOnErrorsPlugin, HotModuleReplacementPlugin } = require('webpack');
 
 module.exports = {
   mode: 'development',
-  entry: ['core-js/stable', 'regenerator-runtime/runtime', './src/index.js'],
+  entry: [
+    'core-js/stable',
+    'regenerator-runtime/runtime',
+    'webpack-hot-middleware/client',
+    './src/index-dev.js',
+  ],
   output: {
     path: path.resolve(__dirname, 'public'),
     filename: 'bundle.js',
@@ -22,8 +28,8 @@ module.exports = {
       },
     ],
   },
-  devServer: {
-    compress: true,
-    contentBase: path.join(__dirname, 'public'),
-  },
+  plugins: [
+    new NoEmitOnErrorsPlugin(),
+    new HotModuleReplacementPlugin(),
+  ],
 };

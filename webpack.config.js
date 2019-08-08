@@ -2,9 +2,13 @@ const path = require('path');
 
 module.exports = {
   mode: 'production',
-  entry: ['core-js/stable', 'regenerator-runtime/runtime', './src/index.js'],
+  entry: [
+    'core-js/stable',
+    'regenerator-runtime/runtime',
+    './src/index.js',
+  ],
   output: {
-    path: path.resolve(__dirname, 'build'),
+    path: path.resolve(__dirname, 'public'),
     filename: 'bundle.js',
   },
   resolve: {
