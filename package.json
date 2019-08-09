@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest --silent",
     "build": "webpack",
-    "dev:client": "node server-dev.js",
+    "dev:client": "rm -f public/bundle.js && node server-dev.js",
     "dev:server": "npm run build && nodemon server.js",
     "start": "npm run build && node server.js"
   },

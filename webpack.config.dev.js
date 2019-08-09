@@ -7,7 +7,7 @@ module.exports = {
     'core-js/stable',
     'regenerator-runtime/runtime',
     'webpack-hot-middleware/client',
-    './src/index-dev.js',
+    './client/index.js',
   ],
   output: {
     path: path.resolve(__dirname, 'public'),

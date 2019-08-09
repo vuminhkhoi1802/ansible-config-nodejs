@@ -8,7 +8,7 @@ const devMiddleware = require('./utils/koa-webpack-dev-middleware');
 const { publicPath } = clientConfig.output;
 const clientCompiler = webpack(clientConfig);
 
-app.use(devMiddleware(clientCompiler, { publicPath }));
+app.use(devMiddleware(clientCompiler, { hot: true, publicPath }));
 app.use(hotMiddleware(clientCompiler, { heartbeat: 5000 }));
 
 app.use(router.routes());
