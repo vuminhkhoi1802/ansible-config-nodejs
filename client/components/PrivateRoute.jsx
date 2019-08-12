@@ -2,18 +2,24 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Route, Redirect } from 'react-router';
+import LinearProgress from '@material-ui/core/LinearProgress';
+import { isInitializingSelector, isAuthenticatedSelector } from '../selectors';
 
-const AuthRoute = ({ component: WrappedComponent, isAuthenticated, isLoading, ...rest }) => {
+const AuthRoute = ({ component: WrappedComponent, isAuthenticated, isInitializing, ...rest }) => {
   const CalculatedComponent = (props) => {
-    if (isAuthenticated && !isLoading) {
-      return <WrappedComponent {...props} />;
+    if (isInitializing) {
+      return <LinearProgress />;
     }
 
-    const { location } = props;
+    if (!isAuthenticated) {
+      const { location } = props;
 
-    return (
-      <Redirect to={{ pathname: '/login', state: { from: location } }} />
-    );
+      return (
+        <Redirect to={{ pathname: '/login', state: { from: location } }} />
+      );
+    }
+
+    return <WrappedComponent {...props} />;
   };
 
   CalculatedComponent.propTypes = {
@@ -27,17 +33,13 @@ const AuthRoute = ({ component: WrappedComponent, isAuthenticated, isLoading, ..
 
 AuthRoute.propTypes = {
   component: PropTypes.func.isRequired,
-  isLoading: PropTypes.bool.isRequired,
+  isInitializing: PropTypes.bool.isRequired,
   isAuthenticated: PropTypes.bool.isRequired,
 };
 
-const mapStateToProps = (state) => {
-  console.log('state', state);
-
-  return ({
-    isLoading: state.auth.isLoading || false,
-    isAuthenticated: state.auth.isAuthenticated || false,
-  });
-};
+const mapStateToProps = state => ({
+  isInitializing: isInitializingSelector(state),
+  isAuthenticated: isAuthenticatedSelector(state),
+});
 
 export default connect(mapStateToProps)(AuthRoute);

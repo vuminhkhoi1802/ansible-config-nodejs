@@ -1,4 +1,5 @@
 const path = require('path');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const { NoEmitOnErrorsPlugin, HotModuleReplacementPlugin } = require('webpack');
 
 module.exports = {
@@ -10,7 +11,8 @@ module.exports = {
     './client/index.js',
   ],
   output: {
-    path: path.resolve(__dirname, 'public'),
+    path: path.resolve(__dirname, 'public/assets'),
+    publicPath: '/assets',
     filename: 'bundle.js',
   },
   resolve: {
@@ -29,6 +31,7 @@ module.exports = {
     ],
   },
   plugins: [
+    new CleanWebpackPlugin(),
     new NoEmitOnErrorsPlugin(),
     new HotModuleReplacementPlugin(),
   ],

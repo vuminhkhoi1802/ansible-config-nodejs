@@ -1,17 +1,15 @@
-import { LOGIN, LOGOUT } from '../events';
+import { AUTH, INITIALIZING } from '../events';
 import createReducer from '../utils/create-reducer';
 
 const authReducers = {};
 
-authReducers[LOGIN] = (state, { isLoading = false, isAuthenticated = true }) => ({
+authReducers[INITIALIZING] = (state, { initializing = false }) => ({
   ...state,
-  isLoading,
-  isAuthenticated,
+  initializing,
 });
 
-authReducers[LOGOUT] = (state, { isLoading = false, isAuthenticated = false }) => ({
+authReducers[AUTH] = (state, { isAuthenticated = true }) => ({
   ...state,
-  isLoading,
   isAuthenticated,
 });
 

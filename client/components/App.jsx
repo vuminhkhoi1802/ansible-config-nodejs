@@ -1,36 +1,36 @@
-import React from 'react';
-import { Link, Route, BrowserRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import React, { Component } from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import PrivateRoute from './PrivateRoute';
-import AuthButton from './AuthButton';
+import Editor from './Editor';
 import Login from './Login';
+import { initializeApp } from '../actions';
 
-function Public() {
-  return <h3>Public</h3>;
+class App extends Component {
+  static propTypes = {
+    initialize: PropTypes.func.isRequired,
+  }
+
+  componentDidMount() {
+    const { initialize } = this.props;
+    initialize();
+  }
+
+  render() {
+    return (
+      <BrowserRouter>
+        <Switch>
+          <Route path="/login" component={Login} />
+          <PrivateRoute component={Editor} />
+        </Switch>
+      </BrowserRouter>
+    );
+  }
 }
 
-function Protected() {
-  return <h3>Protected</h3>;
-}
+const mapDispatchToProps = {
+  initialize: initializeApp,
+};
 
-function AuthExample() {
-  return (
-    <BrowserRouter>
-      <div>
-        <AuthButton />
-        <ul>
-          <li>
-            <Link to="/public">Public Page</Link>
-          </li>
-          <li>
-            <Link to="/protected">Protected Page</Link>
-          </li>
-        </ul>
-        <Route path="/login" component={Login} />
-        <Route path="/public" component={Public} />
-        <PrivateRoute path="/protected" component={Protected} />
-      </div>
-    </BrowserRouter>
-  );
-}
-
-export default AuthExample;
+export default connect(undefined, mapDispatchToProps)(App);

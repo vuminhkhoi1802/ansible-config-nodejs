@@ -2,12 +2,12 @@ import { createSelector } from 'reselect';
 
 const authSelector = state => (state.auth || {});
 
-export const isLoadingSelector = createSelector(
+export const isInitializingSelector = createSelector(
   authSelector,
-  auth => auth.isLoading || false,
+  ({ initializing = true }) => initializing,
 );
 
 export const isAuthenticatedSelector = createSelector(
   authSelector,
-  auth => auth.isAuthenticated || false,
+  ({ isAuthenticated = false }) => isAuthenticated,
 );

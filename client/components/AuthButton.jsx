@@ -47,4 +47,6 @@ const mapDispatchToProps = {
   logout: logoutOfTheApp,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(AuthButton));
+const ConnectedAuthButton = connect(mapStateToProps, mapDispatchToProps)(AuthButton);
+
+export default withRouter(ConnectedAuthButton);
