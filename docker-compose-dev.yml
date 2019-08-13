@@ -21,5 +21,6 @@ services:
     command: "npm run dev"
     volumes:
       - ./server/src:/home/node/app/src
+      - ./server/app.js:/home/node/app/app.js
     ports:
       - 8080:8080
