@@ -24,7 +24,7 @@ const arrayParam = (_value, defaultValue = []) => {
   const value = _value || defaultValue;
 
   if (typeof value === 'string') {
-    return value.split(',').filter(e => !!e);
+    return value.split(',').filter((e) => !!e);
   }
 
   if (!(value instanceof Array)) {

@@ -1,16 +1,13 @@
-parser: babel-eslint
-
 extends:
-  - airbnb
+  - airbnb-base
 
 plugins:
   - jest
-  - react
 
 env:
   es6: true
   jest: true
-  browser: true
+  node: true
 
 rules:
   radix: 0
@@ -22,6 +19,3 @@ rules:
   no-underscore-dangle: 0
   no-restricted-syntax: 0
   object-curly-newline: 0
-  react/forbid-prop-types: 0
-  react/jsx-one-expression-per-line: 0
-  react/jsx-filename-extension: [1, { extensions: ['.js', '.jsx'] }]

@@ -35,8 +35,13 @@ router.post('/api/login', async (ctx) => {
 });
 
 router.get('*', async (ctx) => {
-  ctx.type = 'html';
-  ctx.body = await fs.createReadStream('public/index.html');
+  if (fs.existsSync('public/index.html')) {
+    ctx.type = 'html';
+    ctx.body = await fs.createReadStream('public/index.html');
+  } else {
+    ctx.status = 404;
+    ctx.body = '404 not found';
+  }
 });
 
 module.exports = router;

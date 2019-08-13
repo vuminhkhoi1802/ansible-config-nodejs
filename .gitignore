@@ -8,7 +8,8 @@ logs
 yarn-error.log
 package-error.log
 
-public/assets
-trash/
-node_modules/
+client/node_modules
+server/node_modules
+server/public
+
 TODO
